@@ -1151,7 +1151,6 @@ names(test_ins)<-c("x", "y","ylo", "yhi", "Population")
 names(test_estage)<-c("x", "y","ylo", "yhi", "Population") 
 names(test_lstage)<-c("x", "y","ylo", "yhi", "Population") 
 
-# reorder x by value of y in SEER subset
 vals <- test_ins[ test_ins$Population == 'SEER', ]
 #xvals <- vals[with(vals, order(y)), ]$x #### this reorders by value of SEER y
 xvals <- vals$x ##### this keeps the order from the excel sheets
@@ -1169,11 +1168,12 @@ p1<-ggplot(test_ins, aes(x=y, y=xseery, color=Population))+
   scale_color_manual(values=c("#fdae61","#2b83ba")) + geom_vline(xintercept = 0, linetype=2)+
   xlab("") +
   ylab("") + 
+    scale_x_continuous(limits=c(-40,+42)) +
   theme_minimal() +
   theme(legend.position="none",axis.text.y=element_text(face=ifelse(levels(test_ins$xseery)=="Overall","bold","plain"),
-                                                        color = ifelse(levels(test_ins$xseery)=="Overall","#2b83ba","black")))  +
+                                 color = ifelse(levels(test_ins$xseery)=="Overall","#2b83ba","black")))  +
   guides(fill=guide_legend(reverse=TRUE), 
-         colour=guide_legend(reverse=TRUE))
+            colour=guide_legend(reverse=TRUE))
 p1
 
 # reorder x by value of y in SEER subset
@@ -1193,14 +1193,15 @@ p2<-ggplot(test_estage, aes(x=y, y=xseery, color=Population))+
   geom_pointrangeh(aes(xmin=ylo, xmax=yhi),
                    position = position_dodgev(height=0.5), alpha=.9, fatten=3) + 
   scale_color_manual(values=c("#fdae61","#2b83ba")) +  
-  geom_vline(xintercept = 0, linetype=2)+
+   geom_vline(xintercept = 0, linetype=2)+
   xlab("") +
   ylab("") + 
+  scale_x_continuous(limits=c(-40,+42)) +
   theme_minimal() +
-  theme(axis.text.y=element_text(face=ifelse(levels(test_estage$xseery)=="Overall","bold","plain"),
+  theme(legend.position="none", axis.text.y=element_text(face=ifelse(levels(test_estage$xseery)=="Overall","bold","plain"),
                                  color = ifelse(levels(test_estage$xseery)=="Overall","#2b83ba","black"))) +
   guides(fill=guide_legend(reverse=TRUE), 
-         colour=guide_legend(reverse=TRUE))
+            colour=guide_legend(reverse=TRUE))
 p2
 
 # reorder x by value of y in SEER subset
@@ -1220,21 +1221,18 @@ p3<-ggplot(test_lstage, aes(x=y, y=xseery, color=Population))+
   geom_pointrangeh(aes(xmin=ylo, xmax=yhi),
                    position = position_dodgev(height=0.5), alpha=.9, fatten=3) + 
   scale_color_manual(values=c("#fdae61","#2b83ba")) +  
-  geom_vline(xintercept = 0, linetype=2)+
-  xlab("Difference in Difference") +
+   geom_vline(xintercept = 0, linetype=2)+
+  xlab("Difference in Differences") +
   ylab("") + 
+  scale_x_continuous(limits=c(-40,+42)) +
   theme_minimal() +
-  theme(legend.position="none", axis.text.y=element_text(face=ifelse(levels(test_lstage$xseery)=="Overall","bold","plain"),
-                                                         color = ifelse(levels(test_lstage$xseery)=="Overall","#2b83ba","black"))) +
+  theme(legend.position="bottom", axis.text.y=element_text(face=ifelse(levels(test_lstage$xseery)=="Overall","bold","plain"),
+                                 color = ifelse(levels(test_lstage$xseery)=="Overall","#2b83ba","black"))) +
   guides(fill=guide_legend(reverse=TRUE), 
-         colour=guide_legend(reverse=TRUE))
+            colour=guide_legend(reverse=TRUE))
 p3
 
-#install.packages("grid")
-install.packages("gridExtra")
-library(grid)
-library(gridExtra)
-grid.arrange(p1, p2, p3, ncol = 1)
+
 
 
 
