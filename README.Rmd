@@ -4,4 +4,4 @@ author: "Kimberly J. Johnson"
 date: "May 3, 2018"
 output: html_document
 ---
-##This directory contains files associated with the manucript entitled "Assessing the Impact of the Affordable Care Act Dependent Coverage Provision on Insurance, Cancer Diagnosis Stage, and Survival"
+##This directory contains files associated with the manucript entitled "Impacts of the ACA Dependent Coverage Provision on Young Adults with Cancer"
